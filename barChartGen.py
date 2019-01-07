@@ -13,6 +13,12 @@ import xml.etree.ElementTree as xml
 import math,csv,json
 import matplotlib
 
+SUBDIRECTORY="BarCharts"
+try:
+    os.mkdir(SUBDIRECTORY)
+except Exception:
+    pass
+
 
 def saveData(noOfDiffBars,barType,barStyle,XLabelProp,YLabelProp,XTicks,YTicks,rotationXTicks,rotationYTicks,legProp,WholeData,f,tight_bbox_raw_x,tight_bbox_raw_y,bbox_legend,fontrand):
     #print(XTicks,YTicks)
