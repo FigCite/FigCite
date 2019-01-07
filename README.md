@@ -2,5 +2,5 @@
 
 Requirements:
 
-python>=2.7 \n
+python>=2.7 \\
 matplotlib
