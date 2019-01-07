@@ -611,5 +611,4 @@ if __name__ == "__main__":
     outfile.write(json.dumps(json_images, indent = 1))
     foo.close()
     
-    #generate an random toss 0/1. if 0 go for group bar, 1 for stack group
-    #write switch case
+  
