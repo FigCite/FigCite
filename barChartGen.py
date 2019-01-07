@@ -10,7 +10,7 @@ import random
 import matplotlib.transforms as tf
 from collections import defaultdict
 import xml.etree.ElementTree as xml
-import math,csv,json
+import math,csv,json,os
 import matplotlib
 
 SUBDIRECTORY="BarCharts"
@@ -19,7 +19,7 @@ try:
 except Exception:
     pass
 
-
+#keeping the data in xml format
 def saveData(noOfDiffBars,barType,barStyle,XLabelProp,YLabelProp,XTicks,YTicks,rotationXTicks,rotationYTicks,legProp,WholeData,f,tight_bbox_raw_x,tight_bbox_raw_y,bbox_legend,fontrand):
     #print(XTicks,YTicks)
     
@@ -64,7 +64,8 @@ def saveData(noOfDiffBars,barType,barStyle,XLabelProp,YLabelProp,XTicks,YTicks,r
         tree.write(fh)
     make_json_type1(tight_bbox_raw_x,tight_bbox_raw_y,bbox_legend,f)
     make_csv_type2(tight_bbox_raw_x,tight_bbox_raw_y,bbox_legend,f)
-    
+
+#preparing the colors
 def colormapProperties(noOfColorsReq):
     colorMapList =['viridis','plasma','inferno','magma','cividis']
     #print colorMapList
@@ -83,7 +84,7 @@ def barChart_stack(N,selectedLabels,count):
     XLabel = selectedLabels[0] #x-labels
     YLabel = selectedLabels[1]#y-labels
     
-    
+    #defining dpi and size of the figure
     mydpi=100
     fig = plt.figure(figsize = (6,4)) 
     ax = fig.subplots()
@@ -95,6 +96,7 @@ def barChart_stack(N,selectedLabels,count):
     colors = colormapProperties(len(methods))
     #print(colors)
     
+    #preparing ytick measurement
     ysumlist=[]
     for i in range(noOfDiffBars):
         ysum = 0
@@ -108,7 +110,7 @@ def barChart_stack(N,selectedLabels,count):
     width = 0.35       # the width of the bars: can also be len(x) sequence
     b=None
     p=[]
-    WholeData = {}
+    WholeData = {} #storing the data in dictionary for each method
     m = 0
     for i in range(noOfDiffBars):
         WholeData[i]={}
@@ -120,12 +122,13 @@ def barChart_stack(N,selectedLabels,count):
         WholeData[i]["method"]=methods[i]
         p.append(p1)
         b = data[i]
-        
+    #properties of XTicks    
     XTicks = []
     rotationXTicks = random.choice([45,90,-90,-45,None])
     rotationYTicks = random.choice([45,90,-90,-45,None])
     for i in range(N): #number of x data points
         XTicks.append(random.randint(1,50))
+    #properties of YTicks
     ygrp = random.randint(4,7)
     ystep = float(ymax)/float(ygrp)
     YTicks = np.arange(0, ymax, ystep)
@@ -134,32 +137,35 @@ def barChart_stack(N,selectedLabels,count):
     
     XLabelProp ={}
     YLabelProp = {}
+    #properties of XLabels
     xposX = random.uniform(0.2,0.8)
     yposX = random.uniform(-0.05,-0.4)
-    ax.set_xlabel(XLabel,bbox=None)
+    ax.set_xlabel(XLabel,fontsize = fontrand,bbox=None)
     ax.xaxis.set_label_coords(xposX, yposX, transform=None)
     XLabelProp["xposX"]=xposX
     XLabelProp["yposX"]=yposX
     XLabelProp["xlabel"]=XLabel
     XLabelProp["bbox"]="None"
     
-    
+    #properties of YLabels
     xposY = random.uniform(-0.08,-0.2)
     yposY = random.uniform(0.2,0.8)
-    ax.set_ylabel(YLabel,bbox=None)
+    ax.set_ylabel(YLabel,fontsize = fontrand,bbox=None)
     ax.yaxis.set_label_coords(xposY, yposY, transform=None) 
     YLabelProp["xposY"]=xposY
     YLabelProp["yposY"]=yposY
     YLabelProp["ylabel"]=YLabel
     YLabelProp["bbox"]="None"
     
+    #properties of Legend
     legProp={}
     legXLoc = random.uniform(0.1,0.7)
     legYLoc = random.uniform(0.2,0.72)
     legbboxX = random.uniform(0,0.9)
     legbboxY = random.uniform(0.3,0.7)
     fontrand = random.randint(7,12)
-    leg = plt.legend(p, methods,loc = (legXLoc,legXLoc),bbox_to_anchor=(legbboxX, legbboxX,0,0),fontsize = fontrand)
+    
+    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY,0,0),fontsize = fontrand)
     rendererIns = fig.canvas.get_renderer()
     #print(ax.yaxis.get_tightbbox())
     tight_bbox_raw_x = ax.xaxis.get_tightbbox(rendererIns)
@@ -238,11 +244,13 @@ def barhChart_stack(N,selectedLabels,count):
     plt.yticks(ind,XTicks,rotation=rotationXTicks)
     plt.xticks(YTicks,rotation = rotationYTicks)
     
+    fontrand = random.randint(7,12)
+    
     XLabelProp ={}
     YLabelProp = {}
     xposX = random.uniform(0.2,0.8)
     yposX = random.uniform(-0.05,-0.4)
-    ax.set_xlabel(XLabel,bbox=None)
+    ax.set_xlabel(XLabel,fontsize = fontrand,bbox=None)
     ax.xaxis.set_label_coords(xposX, yposX, transform=None)
     XLabelProp["xposX"]=xposX
     XLabelProp["yposX"]=yposX
@@ -252,7 +260,7 @@ def barhChart_stack(N,selectedLabels,count):
     
     xposY = random.uniform(-0.08,-0.2)
     yposY = random.uniform(0.2,0.8)
-    ax.set_ylabel(YLabel,bbox=None)
+    ax.set_ylabel(YLabel,fontsize = fontrand,bbox=None)
     ax.yaxis.set_label_coords(xposY, yposY, transform=None) 
     YLabelProp["xposY"]=xposY
     YLabelProp["yposY"]=yposY
@@ -264,8 +272,8 @@ def barhChart_stack(N,selectedLabels,count):
     legYLoc = random.uniform(0.2,0.72)
     legbboxX = random.uniform(0,0.9)
     legbboxY = random.uniform(0.3,0.7)
-    fontrand = random.randint(7,12)
-    leg = plt.legend(p, methods,loc = (legXLoc,legXLoc),bbox_to_anchor=(legbboxX, legbboxX,0,0),fontsize = fontrand)
+   
+    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY,0,0),fontsize = fontrand)
     
     rendererIns = fig.canvas.get_renderer()
     #print(ax.yaxis.get_tightbbox())
@@ -347,12 +355,12 @@ def barChart_group(N,selectedLabels,count):
     plt.xticks(XTicks,rotation = rotationXTicks)
     plt.yticks(YTicks,rotation = rotationYTicks)
     
-    
+    fontrand = random.randint(7,12)
     XLabelProp ={}
     YLabelProp = {}
     xposX = random.uniform(0.2,0.8)
     yposX = random.uniform(-0.05,-0.4)
-    ax.set_xlabel(XLabel,bbox=None)
+    ax.set_xlabel(XLabel,fontsize= fontrand,bbox=None)
     ax.xaxis.set_label_coords(xposX, yposX, transform=None)
     XLabelProp["xposX"]=xposX
     XLabelProp["yposX"]=yposX
@@ -374,8 +382,8 @@ def barChart_group(N,selectedLabels,count):
     legYLoc = random.uniform(0.2,0.72)
     legbboxX = random.uniform(0,0.9)
     legbboxY = random.uniform(0.3,0.7)
-    fontrand = random.randint(7,12)
-    leg = plt.legend(p, methods,loc = (legXLoc,legXLoc),bbox_to_anchor=(legbboxX, legbboxX,0,0),fontsize = fontrand)
+    #fontrand = random.randint(7,12)
+    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY,0,0),fontsize = fontrand)
     
     rendererIns = fig.canvas.get_renderer()
     #print(ax.yaxis.get_tightbbox())
@@ -458,11 +466,12 @@ def barhChart_group(N,selectedLabels,count):
     plt.yticks(XTicks,rotation = rotationXTicks)
     plt.xticks(YTicks,rotation = rotationYTicks)
     
+    fontrand = random.randint(7,12)
     XLabelProp ={}
     YLabelProp = {}
     xposX = random.uniform(0.2,0.8)
     yposX = random.uniform(-0.05,-0.4)
-    ax.set_xlabel(XLabel,bbox=None)
+    ax.set_xlabel(XLabel,fontsize =fontrand,bbox=None)
     ax.xaxis.set_label_coords(xposX, yposX, transform=None)
     XLabelProp["xposX"]=xposX
     XLabelProp["yposX"]=yposX
@@ -472,7 +481,7 @@ def barhChart_group(N,selectedLabels,count):
     
     xposY = random.uniform(-0.08,-0.2)
     yposY = random.uniform(0.2,0.8)
-    ax.set_ylabel(YLabel,bbox=None)
+    ax.set_ylabel(YLabel,fontsize =fontrand,bbox=None)
     ax.yaxis.set_label_coords(xposY, yposY, transform=None) 
     YLabelProp["xposY"]=xposY
     YLabelProp["yposY"]=yposY
@@ -484,7 +493,7 @@ def barhChart_group(N,selectedLabels,count):
     legYLoc = random.uniform(0.2,0.72)
     legbboxX = random.uniform(0,0.9)
     legbboxY = random.uniform(0.3,0.7)
-    fontrand = random.randint(7,12)
+    #fontrand = random.randint(7,12)
     leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY,0,0),fontsize = fontrand)
     
     rendererIns = fig.canvas.get_renderer()
