@@ -165,7 +165,7 @@ def barChart_stack(N,selectedLabels,count):
     legbboxY = random.uniform(0.3,0.7)
     fontrand = random.randint(7,12)
     
-    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY,0,0),fontsize = fontrand)
+    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY),fontsize = fontrand)
     rendererIns = fig.canvas.get_renderer()
     #print(ax.yaxis.get_tightbbox())
     tight_bbox_raw_x = ax.xaxis.get_tightbbox(rendererIns)
@@ -273,7 +273,7 @@ def barhChart_stack(N,selectedLabels,count):
     legbboxX = random.uniform(0,0.9)
     legbboxY = random.uniform(0.3,0.7)
    
-    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY,0,0),fontsize = fontrand)
+    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY),fontsize = fontrand)
     
     rendererIns = fig.canvas.get_renderer()
     #print(ax.yaxis.get_tightbbox())
@@ -383,7 +383,7 @@ def barChart_group(N,selectedLabels,count):
     legbboxX = random.uniform(0,0.9)
     legbboxY = random.uniform(0.3,0.7)
     #fontrand = random.randint(7,12)
-    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY,0,0),fontsize = fontrand)
+    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY),fontsize = fontrand)
     
     rendererIns = fig.canvas.get_renderer()
     #print(ax.yaxis.get_tightbbox())
@@ -494,7 +494,7 @@ def barhChart_group(N,selectedLabels,count):
     legbboxX = random.uniform(0,0.9)
     legbboxY = random.uniform(0.3,0.7)
     #fontrand = random.randint(7,12)
-    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY,0,0),fontsize = fontrand)
+    leg = plt.legend(p, methods,loc = (legXLoc,legYLoc),bbox_to_anchor=(legbboxX, legbboxY),fontsize = fontrand)
     
     rendererIns = fig.canvas.get_renderer()
     #print(ax.yaxis.get_tightbbox())
