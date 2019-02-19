@@ -159,7 +159,8 @@ if __name__ == "__main__":
     outfile_csv = csv.writer(open("piechart_csv_5000_10000.csv","w"))
     json_images=[]
     root = xml.Element("PieCharts")
-    for c in range(5001,10001):
+    noOfPlot=2000
+    for c in range(0,noOfPlot):
         try:
             global numOfMethods
             numOfMethods = random.randint(2,5)
