@@ -9,6 +9,7 @@ numpy<br/>
 
 
 Instructions:<br/>
+To run the above codes, we have make minor changes in few lines in the code. I have mentioned the lines below which you need to modify.
 
 To run barChartGen.py file:<br/>
 
