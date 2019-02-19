@@ -2,7 +2,7 @@
 
 Requirements:
 
-python>=2.7 \\
+python>=2.7 
 matplotlib
 lxml
 numpy
@@ -12,7 +12,7 @@ Instructions:
 
 To run barChartGen.py file:
 
-filename = "BarCharts/bar_xml_8001_10000.xml" #Stores information of each bar chart in xml format. \\
+filename = "BarCharts/bar_xml_8001_10000.xml" #Stores information of each bar chart in xml format. <br/>
 outfile = open("barchart_json_8001_10000.json","w") #Also store it in json format \\
 outfile_csv = csv.writer(open("barchart_csv_8001_10000.csv","w")) #Storing it in csv format
 NumberOfBarPlot = 10001 #change this variable to set the number of plots you want to generate
