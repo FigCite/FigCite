@@ -349,10 +349,11 @@ if __name__ == "__main__":
     root = xml.Element("LineCharts")
     outfile_csv.writerow(["image_path","x1","x2","y1","y2","class"])
     json_images=[]
-    for c in range(15001,20001):
+    noOfPlots=12000
+    for c in range(0,noOfPlot):
         try:
-            numOfMethods = random.randint(2,5)
-            NoOfDP = random.randint(3,20)
+            numOfMethods = random.randint(2,5) #number of methods
+            NoOfDP = random.randint(3,20) #number of data points
             x_gt ={}
             y_gt = {}
             for i in range(numOfMethods):
