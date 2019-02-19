@@ -589,7 +589,7 @@ if __name__ == "__main__":
     NumberOfBarPlot = 10001
     root = xml.Element("BarCharts")
     #barChart_group(N,selectedLabels,1)
-    for count in range(8001,NumberOfBarPlot):
+    for count in range(0,NumberOfBarPlot):
         print "Running No.",count
         selectedLabels = random.sample(set(labelsDict),2)
         try:
